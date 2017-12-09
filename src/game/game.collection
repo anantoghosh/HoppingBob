@@ -1,0 +1,82 @@
+name: "default"
+instances {
+  id: "left_wall"
+  prototype: "/src/wall/wall.go"
+  position {
+    x: -300.0
+    y: 30.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.70710677
+    w: 0.70710677
+  }
+  scale3 {
+    x: 5.0
+    y: 2.0
+    z: 1.0
+  }
+}
+instances {
+  id: "player"
+  prototype: "/src/player/player.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 0.3
+    y: 0.3
+    z: 1.0
+  }
+}
+instances {
+  id: "right_wall"
+  prototype: "/src/wall/wall.go"
+  position {
+    x: 300.0
+    y: 30.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.70710677
+    w: 0.70710677
+  }
+  scale3 {
+    x: 5.0
+    y: 2.0
+    z: 1.0
+  }
+}
+instances {
+  id: "camera"
+  prototype: "/src/camera/camera.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 50.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+scale_along_z: 0
