@@ -1,29 +1,57 @@
-function init(self)
-    -- Add initialization code here
-    -- Remove this function if not needed
+local h = {
+  start = hash("start"),
+  click = hash("click"),
+  trigger_response = hash("trigger_response")
+}
+
+local r = "right"
+local l = "left"
+
+local function move(self, dt)
+  local pos = go.get_position(".")
+
+  if self.direction == r then
+    pos.x = pos.x + self.speed * dt
+  elseif self.direction == l then
+    pos.x = pos.x - self.speed * dt
+  end
+
+  go.set_position(pos, ".")
 end
 
-function final(self)
-    -- Add finalization code here
-    -- Remove this function if not needed
+function init(self)
+  msg.post(".", "acquire_input_focus")
+  msg.post("#", "start")
+  self.start = false
+  self.direction = r
+  self.moving = false
+  self.speed = 500
 end
 
 function update(self, dt)
-    -- Add update code here
-    -- Remove this function if not needed
+  if self.moving then
+    move(self, dt)
+  end
 end
 
 function on_message(self, message_id, message, sender)
-    -- Add message-handling code here
-    -- Remove this function if not needed
+  if message_id == h.start then
+    self.start = true
+    self.moving = true
+  elseif message_id == h.trigger_response and message.enter then
+    self.moving = false
+  end
 end
 
 function on_input(self, action_id, action)
-    -- Add input-handling code here
-    -- Remove this function if not needed
-end
-
-function on_reload(self)
-    -- Add reload-handling code here
-    -- Remove this function if not needed
+  if self.start then
+    if action_id == h.click and action.pressed and not self.moving then
+      if self.direction == l then
+        self.direction = r
+      else
+        self.direction = l
+      end
+      self.moving = true
+    end
+  end
 end

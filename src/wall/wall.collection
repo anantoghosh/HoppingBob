@@ -1,0 +1,42 @@
+name: "default"
+instances {
+  id: "wall"
+  prototype: "/src/wall/wall.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "wall_sprite"
+  prototype: "/src/wall/wall_sprite.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 2.0
+    y: 9.15
+    z: 1.0
+  }
+}
+scale_along_z: 0

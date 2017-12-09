@@ -1,0 +1,34 @@
+local profiler = true
+_debug = false
+
+if profiler then
+  msg.post("@system:", "toggle_profile")
+end
+
+if "" .. hash("debug") == "[debug]" then
+  _debug = true
+end
+
+local info = sys.get_sys_info()
+
+pprint(info)
+
+if info.system_name ~= "Android" or info.system_name ~= "HTML5" then
+  facebook = {
+    access_token = function ()
+      return nil
+    end,
+    permissions = function ()
+      return {}
+    end,
+    login_with_read_permissions = function ()
+      return nil
+    end,
+    login_with_publish_permissions = function ()
+      return nil
+    end,
+    show_dialog = function ()
+      return nil
+    end,
+  }
+end
