@@ -1,6 +1,8 @@
 local profiler = true
 _debug = false
 
+msg.post("@system:", "set_vsync", { swap_interval = 0 })
+
 if profiler then
   msg.post("@system:", "toggle_profile")
 end
