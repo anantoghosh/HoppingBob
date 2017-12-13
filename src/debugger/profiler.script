@@ -1,4 +1,4 @@
-local profiler = true
+local profiler = false
 _debug = false
 
 msg.post("@system:", "set_vsync", { swap_interval = 0 })

@@ -4,6 +4,12 @@ images {
 images {
   image: "/assets/images/ground.png"
 }
+images {
+  image: "/assets/images/belt.png"
+}
+images {
+  image: "/assets/images/beltonly.png"
+}
 margin: 0
 extrude_borders: 0
 inner_padding: 0
