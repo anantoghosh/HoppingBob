@@ -63,7 +63,7 @@ collection_instances {
   id: "left_wall"
   collection: "/src/wall/wall.collection"
   position {
-    x: -200.0
+    x: -500.0
     y: 0.0
     z: 0.0
   }
@@ -83,7 +83,7 @@ collection_instances {
   id: "right_wall"
   collection: "/src/wall/wall.collection"
   position {
-    x: 200.0
+    x: 500.0
     y: 0.0
     z: 0.0
   }
@@ -94,7 +94,7 @@ collection_instances {
     w: 1.0
   }
   scale3 {
-    x: 1.0
+    x: -1.0
     y: 1.0
     z: 1.0
   }

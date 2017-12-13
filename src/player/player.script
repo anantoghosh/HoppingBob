@@ -25,7 +25,7 @@ function init(self)
   self.start = false
   self.direction = r
   self.moving = false
-  self.speed = 500
+  self.speed = 2000
 end
 
 function update(self, dt)
