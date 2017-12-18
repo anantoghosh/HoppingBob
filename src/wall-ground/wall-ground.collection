@@ -1,7 +1,7 @@
 name: "default"
 instances {
   id: "conveyorBelt"
-  prototype: "/src/wall-ground/conveyorBelt.go"
+  prototype: "/src/wall-ground/platform.go"
   position {
     x: 78.0
     y: 0.0
@@ -41,7 +41,7 @@ instances {
 }
 instances {
   id: "conveyorBelt1"
-  prototype: "/src/wall-ground/conveyorBelt.go"
+  prototype: "/src/wall-ground/platform.go"
   position {
     x: 78.0
     y: -373.0
@@ -81,7 +81,7 @@ instances {
 }
 instances {
   id: "conveyorBelt2"
-  prototype: "/src/wall-ground/conveyorBelt.go"
+  prototype: "/src/wall-ground/platform.go"
   position {
     x: 78.0
     y: -835.0
@@ -121,7 +121,7 @@ instances {
 }
 instances {
   id: "conveyorBelt3"
-  prototype: "/src/wall-ground/conveyorBelt.go"
+  prototype: "/src/wall-ground/platform.go"
   position {
     x: 78.0
     y: 796.0
@@ -141,7 +141,7 @@ instances {
 }
 instances {
   id: "conveyorBelt4"
-  prototype: "/src/wall-ground/conveyorBelt.go"
+  prototype: "/src/wall-ground/platform.go"
   position {
     x: 78.0
     y: 423.0

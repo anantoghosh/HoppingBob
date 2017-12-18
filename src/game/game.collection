@@ -59,6 +59,46 @@ instances {
     z: 1.0
   }
 }
+instances {
+  id: "stage1"
+  prototype: "/src/map/stage1.go"
+  position {
+    x: 0.0
+    y: -1000.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "platform_generator"
+  prototype: "/src/wall-ground/platform_generator.go"
+  position {
+    x: -286.0
+    y: 6132.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
 collection_instances {
   id: "left_wall"
   collection: "/src/wall-ground/wall-ground.collection"

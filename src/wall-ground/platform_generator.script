@@ -1,0 +1,36 @@
+function init(self)
+  -- Add initialization code here
+  -- Remove this function if not needed
+end
+
+function final(self)
+  -- Add finalization code here
+  -- Remove this function if not needed
+end
+
+local timer = 0
+
+function update(self, dt)
+  if timer > 1 then
+    factory.create("#platform_generator", go.get(".", "position"))
+    timer = 0
+  end
+
+  timer = timer + dt
+
+end
+
+function on_message(self, message_id, message, sender)
+  -- Add message-handling code here
+  -- Remove this function if not needed
+end
+
+function on_input(self, action_id, action)
+  -- Add input-handling code here
+  -- Remove this function if not needed
+end
+
+function on_reload(self)
+  -- Add reload-handling code here
+  -- Remove this function if not needed
+end

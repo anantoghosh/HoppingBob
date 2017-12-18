@@ -1,0 +1,2 @@
+prototype: "/src/wall-ground/platform.go"
+load_dynamically: false

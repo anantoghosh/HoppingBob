@@ -1,6 +1,6 @@
 components {
   id: "conveyorBelt"
-  component: "/src/wall-ground/conveyorBelt.script"
+  component: "/src/wall-ground/platform.script"
   position {
     x: 0.0
     y: 0.0
