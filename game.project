@@ -1,6 +1,7 @@
 [project]
 title = HoppingBob
 version = 0.1
+dependencies = https://github.com/britzl/defold-timer/archive/master.zip
 
 [bootstrap]
 main_collection = /main/main.collectionc
@@ -17,7 +18,7 @@ variable_dt = 1
 
 [physics]
 scale = 0.02
-debug = 1
+debug = 0
 
 [script]
 shared_state = 1

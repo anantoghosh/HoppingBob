@@ -1,4 +1,4 @@
-name: "default"
+name: "game"
 instances {
   id: "player"
   prototype: "/src/player/player.go"
@@ -25,7 +25,7 @@ instances {
   position {
     x: 0.0
     y: 0.0
-    z: 50.0
+    z: 200.0
   }
   rotation {
     x: 0.0
@@ -84,7 +84,7 @@ instances {
   prototype: "/src/wall-ground/platform_generator.go"
   position {
     x: -286.0
-    y: 6132.0
+    y: 1947.0
     z: 0.0
   }
   rotation {
