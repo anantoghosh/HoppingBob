@@ -1,0 +1,153 @@
+local WIDTH = tonumber(sys.get_config("display.width"))
+local HEIGHT = tonumber(sys.get_config("display.height"))
+
+function init(self)
+  msg.post(".", "acquire_input_focus")
+  msg.post("#collisionobject", "disable")
+
+  -- store initial position and rotation so that we can reset after flinging
+  self.initial_position = go.get_position()
+  self.initial_rotation = go.get_rotation()
+
+  -- keep track of the camera offset since we need to keep the offset when we let the camera follow the flung bird
+  self.camera_offset = go.get_world_position() - go.get_world_position("camera")
+
+  -- the target position of the camera that we will tween towards every frame
+  self.camera_target = go.get_position("camera")
+
+  self.flinging = false -- true if we are currently flinging
+  self.aiming = false -- true if we are currently aiming
+  self.panning = false -- true if we are currently panning around the level
+  self.idle_frames = 0 -- the number of frames where the flung bird has been idle
+end
+
+function final(self)
+  msg.post(".", "release_input_focus")
+  msg.post("camera", "release_camera_focus")
+end
+
+local function get_bounds(self)
+  local pos = go.get_world_position()
+  local bounds = vmath.vector4(pos.x - (WIDTH / 2), pos.y - (HEIGHT / 2), pos.x + (WIDTH / 2), pos.y + (HEIGHT / 2))
+  return bounds
+end
+
+function update(self, dt)
+  --
+  -- adjust camera target and zoom level while flinging
+  --
+  if self.flinging then
+    local bounds = get_bounds(self)
+    self.camera_target = vmath.vector3(bounds.x + ((bounds.z - bounds.x) * 0.25), go.get_position().y, 0)
+    - self.camera_offset
+  end
+
+  --
+  -- move and zoom the camera towards the target position and zoom level
+  --
+  go.set_position(vmath.lerp(0.1, go.get_position("camera"), self.camera_target), "camera")
+
+  --
+  -- do we have a bird in the air?
+  -- in this case we check if the bird is idle or still moving
+  --
+  if self.flinging then
+    -- get angular and linear velocity and start counting the number of frames when
+    -- we're more or less still/idle
+    -- if we're idle for a number of frames we assume that the system is at rest and
+    -- let the player fling again
+    local linear_velocity = go.get("#collisionobject", "linear_velocity")
+    local angular_velocity = go.get("#collisionobject", "angular_velocity")
+    if vmath.length(linear_velocity) < 5 and vmath.length(angular_velocity) < 5 then
+      self.idle_frames = self.idle_frames + 1
+      if self.idle_frames > 60 then
+        msg.post("#collisionobject", "disable")
+        self.flinging = false
+        self.camera_target = self.initial_position - self.camera_offset
+      end
+    else
+      self.idle_frames = 0
+    end
+  end
+end
+
+function on_message(self, message_id, message, sender)
+end
+
+function on_input(self, action_id, action)
+  local action_position = vmath.vector3(action.x, action.y, 0)
+  --
+  -- check for touch/click
+  -- we decide here if we should start aiming or if we should fling the bird
+  --
+  if action_id == hash("click") then
+    if action.pressed then
+      --
+      -- did we click on the bird?
+      -- if yes, start aiming
+      -- if no, start panning
+	--
+	local pos = action_position - go.get_world_position()
+	local value =vmath.length(action_position + go.get_world_position("camera") - go.get_world_position())
+	print("value:", pos)
+      if pos.x <= 120 and pos.x >= -120 and pos.y <= 120 and pos.y >= -120 then
+        self.aiming = true
+        self.pressed_position = action_position
+      else
+        self.panning = true
+        self.pressed_position = action_position
+        self.pressed_camera_position = go.get_position("camera")
+      end
+    elseif action.released then
+      --
+      -- did we release while aiming?
+      -- if yes, fling the bird!
+      -- if no, stop panning
+      --
+      if self.aiming then
+        local direction = self.initial_position - go.get_position()
+        msg.post("#collisionobject", "enable")
+        msg.post("#collisionobject", "apply_force", { force = direction * 950 * go.get("#collisionobject", "mass"), position = go.get_world_position() })
+        msg.post(".", "release_input_focus")
+        self.flinging = true
+        self.aiming = false
+        self.idle_frames = 0
+        self.pressed_position = nil
+      else
+        self.panning = false
+      end
+    end
+    --
+    -- mouse/finger moved while aiming?
+    --
+  elseif self.aiming then
+    print "here"
+    --
+    -- calculate the distance we've moved from the position where we started
+    -- dragging the bird
+    -- limit this distance to below a threshold value
+    --
+    local dx = self.pressed_position.x - action_position.x
+    local dy = self.pressed_position.y - action_position.y
+    local radians = math.atan2(dy, dx)
+    local cos = math.cos(radians)
+    local sin = math.sin(radians)
+    local distance = math.sqrt(dx * dx + dy * dy)
+    local max_distance = 120
+    if distance > max_distance then
+      dx = cos * max_distance
+      dy = sin * max_distance
+      distance = max_distance
+    end
+    go.set_position(vmath.vector3(self.initial_position.x - dx, self.initial_position.y - dy, self.initial_position.z))
+    --
+    -- mouse/finger moved while panning?
+    -- update camera target position and clamp it horizontally
+    --
+  elseif self.panning then
+    local delta = self.pressed_position - action_position
+    local pos = self.pressed_camera_position + delta
+    pos.x = math.min(4000, math.max(-4000, pos.x))
+    self.camera_target = pos
+  end
+end

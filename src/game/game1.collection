@@ -1,24 +1,4 @@
-name: "main"
-instances {
-  id: "camera"
-  prototype: "/src/camera/camera.go"
-  position {
-    x: 0.0
-    y: 0.0
-    z: 100.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale3 {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-  }
-}
+name: "default"
 instances {
   id: "ground"
   prototype: "/src/wall-ground/ground.go"
@@ -29,51 +9,6 @@ instances {
   children: "belt4"
   position {
     x: -683.0
-    y: 0.0
-    z: 0.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale3 {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-  }
-}
-instances {
-  id: "ground1"
-  prototype: "/src/wall-ground/ground.go"
-  children: "belt5"
-  children: "belt6"
-  children: "belt7"
-  children: "belt8"
-  children: "belt9"
-  position {
-    x: 683.0
-    y: 0.0
-    z: 0.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 1.0
-    w: 6.123234E-17
-  }
-  scale3 {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-  }
-}
-instances {
-  id: "player1"
-  prototype: "/src/player/player1.go"
-  position {
-    x: 0.0
     y: 0.0
     z: 0.0
   }
@@ -190,6 +125,31 @@ instances {
   }
 }
 instances {
+  id: "ground1"
+  prototype: "/src/wall-ground/ground.go"
+  children: "belt5"
+  children: "belt6"
+  children: "belt7"
+  children: "belt8"
+  children: "belt9"
+  position {
+    x: 683.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 1.0
+    w: 6.123234E-17
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
   id: "belt5"
   prototype: "/src/wall-ground/belt.go"
   position {
@@ -282,6 +242,46 @@ instances {
     y: 0.0
     z: 0.70710677
     w: 0.70710677
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "player1"
+  prototype: "/src/player/player1.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "camera"
+  prototype: "/src/camera/camera.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 100.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
   }
   scale3 {
     x: 1.0

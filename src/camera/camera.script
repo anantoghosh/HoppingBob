@@ -1,5 +1,6 @@
 function init(self)
-  msg.post("#camera", "acquire_camera_focus");
+	msg.post("#camera", "acquire_camera_focus")
+	self.initial_position = go.get_position()
 end
 
 function final(self)
@@ -8,8 +9,9 @@ function final(self)
 end
 
 function update(self, dt)
-  -- Add update code here
-  -- Remove this function if not needed
+	local pos = go.get_position()
+	pos.y = math.max(pos.y, self.initial_position.y)
+	go.set_position(pos)
 end
 
 function on_message(self, message_id, message, sender)
